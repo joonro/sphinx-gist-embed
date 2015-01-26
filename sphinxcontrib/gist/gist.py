@@ -12,7 +12,10 @@ class gist(nodes.General, nodes.Element):
 
 def visit(self, node):
 
-    tag = u'''<script src="{0}.js">&nbsp;</script>'''.format(node.url)
+    if node.url.find(".js?file") != -1:
+        tag = u'''<script src="{0}">&nbsp;</script>'''.format(node.url)
+    else:
+        tag = u'''<script src="{0}.js">&nbsp;</script>'''.format(node.url)
 
     self.body.append(tag)
 
